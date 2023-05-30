@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html><head lang="en"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>DäRF</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <meta property="og:image" content="img/cats.png"> -->
+    <!-- <meta property="og:image:type" content="image/png"> -->
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://uhnjiny.github.io/daaarf/">
+    <meta property="og:title" content="DäRF: Boosting Few-shot Neural Radiance Field with Joint Monocular Depth Adaptation">
+    <meta property="og:description" content="">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DäRF: Boosting Few-shot Neural Radiance Field with Joint Monocular Depth Adaptation">
+    <meta name="twitter:description" content="Existing works on open-vocabulary semantic segmentation have utilized large-scale vision-language models, such as CLIP, to leverage their exceptional open-vocabulary recognition capabilities. However,  the problem of transferring these capabilities learned from image-level supervision to the pixel-level task of segmentation and addressing arbitrary unseen categories at inference makes this task challenging. To address these issues, we aim to attentively relate objects within an image to given categories by leveraging relational information among class categories and visual semantics through aggregation, while also adapting the CLIP representations to the pixel-level task. However, we observe that direct optimization of the CLIP embeddings can harm its open-vocabulary capabilities. In this regard, we propose an alternative approach to optimize the image-text similarity map, i.e. the cost map, using a novel cost aggregation-based method. Our framework, namely CAT-Seg, achieves state-of-the-art performance across all benchmarks. We provide extensive ablation studies to validate our choices.">
+    <!-- <meta name="twitter:image" content="img/cats.png"> -->
+
+
+    <!-- mirror: F0%9F%AA%9E&lt -->
+    <!-- <link rel="icon" type="image/x-icon" href="img/cat.ico"> -->
+    <!-- <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text y=%22.9em%22 font-size=%2290%22&gt;%E2%9C%A8&lt;/text&gt;&lt;/svg&gt;"> -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/codemirror.min.css">
+    <link rel="stylesheet" href="css/app.css">
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/codemirror.min.js"></script>
+    <script src="js/clipboard.min.js"></script>
+    <script src="js/video_comparison.js"></script>
+    <script src="js/app.js"></script>
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QVFM103BVF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QVFM103BVF');
+</script>
+
+<body>
+    <div class="container" id="header" style="text-align: center; margin: auto;">
+        <div class="row" id="title-row" style="max-width: 100%; margin: 0 auto; display: inline-block">
+            <h2 class="col-md-12 text-center" id="title">
+                <b>DäRF</b>: Boosting Few-shot Neural Radiance Field <br> with Joint Monocular Depth Adaptation<br>
+                <small>
+                    Arxiv 2023
+                </small>
+            </h2>
+        </div>
+        <div class="row" id="author-row" style="margin:0 auto;">
+            <div class="col-md-12 text-center" style="display: table; margin:0 auto">
+                <a style="text-decoration:none" href="https://uhnjiny.github.io/daaarf/">
+                    Jiuhn&nbsp;Song*
+                </a>
+                <span style="padding-left: 20px;"></span>
+                <a style="text-decoration:none" href="https://uhnjiny.github.io/daaarf/">
+                    Seonghoon&nbsp;Park*
+                </a>
+                <span style="padding-left: 20px;"></span>
+                <a style="text-decoration:none" href="https://uhnjiny.github.io/daaarf/">
+                    Honggyu&nbsp;An*
+                </a>
+                <br>
+                <a style="text-decoration:none" href="https://seokju-cho.github.io/">
+                    Seokju&nbsp;Cho
+                </a>
+                <span style="padding-left: 20px;"></span>
+                <a style="text-decoration:none" href="https://uhnjiny.github.io/daaarf/">
+                    Min-Seop&nbsp;Kwak
+                </a>
+                <span style="padding-left: 20px;"></span>
+                <a style="text-decoration:none" href="https://uhnjiny.github.io/daaarf/">
+                    Sungjin&nbsp;Cho
+                </a>
+                <span style="padding-left: 20px;"></span>
+                <a style="text-decoration:none" href="https://cvlab.korea.ac.kr">
+                    Seungryong&nbsp;Kim
+                </a>
+                <table class="author-table" id="author-table">
+                    <tr>
+                        <td>
+                            Korea University
+                        </td>
+                    </tr>
+                </table>
+                <small>
+                    *Equal Contribution
+                </small>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('author-row').style.maxWidth = document.getElementById("title-row").clientWidth + 'px';
+    </script>
+    <div class="container" id="main">
+        <div class="row">
+                <div class="col-sm-6 col-sm-offset-3 text-center">
+                    <ul class="nav nav-pills nav-justified">
+                        <li>
+                            <a href="https://uhnjiny.github.io/daaarf/">
+                            <img src="./img/paper_image.png" height="60px">
+                                <h4><strong>Paper</strong></h4>
+                            </a>
+                        </li>
+                        <!-- <li>
+                            <a href="https://youtu.be/qrdRH9irAlk">
+                            <img src="./img/youtube_icon.png" height="60px">
+                                <h4><strong>Video</strong></h4>
+                            </a>
+                        </li> -->
+                        <!-- <li>
+                            <a href="https://storage.googleapis.com/gresearch/refraw360/ref.zip" target="_blank">
+                            <image src="img/database_icon.png" height="60px">
+                                <h4><strong>Shiny Dataset</strong></h4>
+                            </a>
+                        </li>                          -->
+                        <li>
+                            <a href="https://uhnjiny.github.io/daaarf/" target="_blank">
+                            <image src="img/github.png" height="60px">
+                                <h4><strong>Code</strong></h4>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="text-center">
+                    <img src="./img/main_figure.png" width="100%">
+                </div>
+
+                <div class="text-justify">
+                    Unlike existing work that distills depths by pretrained MDE to NeRF at seen view only, our DäRF fully exploits the ability of MDE by jointly optimizing NeRF and MDE at a specific scene, and distilling the monocular depth prior to NeRF at both seen and unseen views.
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Abstract
+                </h3>
+                <p class="text-justify">
+                    Neural radiance field (NeRF) shows powerful performance in novel view synthesis and 3D geometry reconstruction, but it suffers from critical performance degradation when the number of known viewpoints is drastically reduced. Existing works attempt to overcome this problem by employing external priors, but their success is limited to certain types of scenes or datasets. Employing monocular depth estimation (MDE) networks, pretrained on large-scale RGB-D datasets, with powerful generalization capability may be a key to solving this problem: however, using MDE in conjunction with NeRF comes with a new set of challenges due to various ambiguity problems exhibited by monocular depths. In this light, we propose a novel framework, dubbed DäRF, that achieves robust NeRF reconstruction with a handful of real-world images by combining the strengths of NeRF and monocular depth estimation through online complementary training. Our framework imposes the MDE network's powerful geometry prior to NeRF representation at both seen and unseen viewpoints to enhance its robustness and coherence. In addition, we overcome the ambiguity problems of monocular depths through patch-wise scale-shift fitting and geometry distillation, which adapts the MDE network to produce depths aligned accurately with NeRF geometry. Experiments show our framework achieves state-of-the-art results both quantitatively and qualitatively, demonstrating consistent and reliable performance in both indoor and outdoor real-world datasets.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Qualitative Results
+                </h3>
+                <div class="text-justify">
+                    Qualitative results of on ScanNet with <b>18 - 20 input view</b>.
+                </div>
+                <div class="text-center">
+                    <img src="./img/Scannet_standard_qual.png" width="100%">
+                </div>
+                <br>
+                <div class="text-justify">
+                    Qualitative results of on ScanNet with <b>9 - 10 input views</b>.
+                </div>
+                <div class="text-center">
+                    <img src="./img/Scannet_extreme_qual.png" width="100%">
+                </div>
+                <br>
+                <div class="text-justify">
+                    Qualitative results of on Tanks and Temples with 10 input views.
+                </div>
+                <div class="text-center">
+                    <img src="./img/TnT-qual.png" width="100%">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Quantitative Results
+                </h3>
+                <div class="text-justify">
+                    The best-performing results are presented in <b>bold</b>, while the second-best results are <u>underlined</u>. 
+                </div>
+                <div class="text-center">
+                    <img src="./img/main_qual_nerf.png" width="100%">
+                </div>
+                <br>
+                <div class="text-center">
+                    <img src="./img/main_qual_depth.png" width="100%">
+                </div>
+            </div>
+        </div>
+
+        <!-- <image src="img/architecture.png" class="img-responsive" alt="overview" width="60%" style="max-height: 450px;margin:auto;"> -->
+
+        <!-- <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Video
+                </h3>
+                <div class="text-center">
+                    <div style="position:relative;padding-top:56.25%;">
+                        <iframe src="https://youtube.com/embed/qrdRH9irAlk" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Motivation of Patch-wise Adjustment
+                </h3>
+                <div class="text-justify">
+                    To validate our framework, we show visualization of the effectiveness of patch-wise scale and shift adjustment, compared to image-level adjustment
+                    <b>(a)</b>: monocular depth with image-level adjustment, 
+                    <b>(b)</b>: monocular depth with patch-level adjustment, and 
+                    <b>(c)</b>: rendered depth by NeRF trained with patch-level adjustment. 
+                    For visualization, depth maps are unprojected into 3D space. The proposed patch-wise adjustment helps to minimize the errors caused by inconsistency in depth differences among objects.
+                    <br><br>
+                </div>
+                <div class="text-center">
+                    <img src="./img/motivation_local.png" width="80%">
+                </div>
+                <!-- <div class="text-center">
+                    <video id="refdir" width="40%" playsinline autoplay loop muted>
+                        <source src="video/reflection_animation.mp4" type="video/mp4" />
+                    </video>
+                </div> -->
+            </div>
+        </div>
+
+
+<!-- 
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Additional Synthetic Results
+                </h3>
+                <div class="video-compare-container">
+                    <video class="video" id="musclecar" loop playsinline autoPlay muted src="video/musclecar_mipnerf_ours.mp4" onplay="resizeAndPlay(this)"></video>
+                    <canvas height=0 class="videoMerge" id="musclecarMerge"></canvas>
+                </div>
+			</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Results on Captured Scenes
+                </h3>
+                Our method also produces accurate renderings and surface normals from captured photographs:
+                <div class="video-compare-container" style="width: 100%">
+                    <video class="video" id="toycar" loop playsinline autoPlay muted src="video/toycar.mp4" onplay="resizeAndPlay(this)"></video>
+                    <canvas height=0 class="videoMerge" id="toycarMerge"></canvas>
+                </div>
+			</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Scene Editing
+                </h3>
+                <div class="text-justify">
+                    We show that our structured representation of the directional MLP allows for scene editing after training. Here we show that we can convincingly change material properties.
+                    <br>
+                    We can increase and decrease material roughness:
+                </div>
+
+                <div style="overflow: hidden;">
+                    <video id="editing-materials" width="100%" playsinline autoplay loop muted style="margin-top: -5%;">
+                        <source src="video/materials_rougher_smoother.mp4" type="video/mp4" />
+                    </video>
+                </div>
+
+                <div class="text-justify">
+                    We can also control the amounts of specular and diffuse colors, or change the diffuse color without affecting the specular reflections:
+                </div>
+                
+                <table width="100%">
+                    <tr>
+                        <td align="left" valign="top" width="50%">
+                            <video id="v2" width="100%" playsinline autoplay loop muted>
+                                <source src="video/car_color2.mp4" type="video/mp4" />
+                            </video>
+                        </td>
+                        <td align="left" valign="top" width="50%">
+                            <video id="v3" width="100%" playsinline autoplay loop muted>
+                                <source src="video/car_color3.mp4" type="video/mp4" />
+                            </video>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div> -->
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Video
+                </h3>
+                <center>
+                    <p>Coming Soon!</p>
+              <!--       <iframe width="560" height="315" src="https://www.youtube.com/embed/4R4Pi8qWXmo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe> -->
+                </center> 
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Citation
+                </h3>
+                <div class="form-group col-md-10 col-md-offset-1">
+                    <textarea id="bibtex" class="form-control" readonly>
+@misc{cho2023catseg,
+    title={CAT-Seg: Cost Aggregation for Open-Vocabulary Semantic Segmentation}, 
+    author={Seokju Cho and Heeseong Shin and Sunghwan Hong and Seungjun An and Seungjun Lee and Anurag Arnab and Paul Hongsuck Seo and Seungryong Kim},
+    year={2023},
+    eprint={2303.11797},
+    archivePrefix={arXiv},
+    primaryClass={cs.CV}
+}
+                    </textarea>
+                </div>
+            </div>
+        </div>
+<!--             
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Citation
+                </h3>
+                <div class="form-group col-md-10 col-md-offset-1">
+                    <textarea id="bibtex" class="form-control" readonly>
+@article{verbin2022refnerf,
+    title={{Ref-NeRF}: Structured View-Dependent Appearance for
+           Neural Radiance Fields},
+    author={Dor Verbin and Peter Hedman and Ben Mildenhall and
+            Todd Zickler and Jonathan T. Barron and Pratul P. Srinivasan},
+    journal={CVPR},
+    year={2022}
+}</textarea>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Acknowledgements
+                </h3>
+                <p class="text-justify">
+                <!-- We would like to thank Lior Yariv and Kai Zhang for helping us evaluate their methods, and Ricardo Martin-Brualla for helpful comments on our text. DV is supported by the National Science Foundation under Cooperative Agreement PHY-2019786 (an NSF AI Institute, <a href="http://iaifi.org">http://iaifi.org</a>) -->
+                    <!-- <br> -->
+                The website template was borrowed from <a href="http://mgharbi.com/">Michaël Gharbi</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+</body></html>
