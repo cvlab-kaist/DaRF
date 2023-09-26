@@ -140,9 +140,13 @@
 	    <div class="container">
 	      <div id="results-carousel" class="carousel results-carousel">
 	        <div class="item item-museum">
+		  <!-- 
 	          <video poster="" id="museum" autoplay controls muted loop height="100%">
 	            <source src="./img/0710.mp4" type="video/mp4">
 	          </video>
+		  --> 
+	          <video class="video" id="Teaser"  width="50%"  loop playsinline autoPlay muted src="./img/0710.mp4" onplay="resizeAndPlay(this)"></video>
+	          <canvas width="150" height="150" class="videoMerge" id="TeaserMerge"></canvas>	
 	        </div>
 	        <div class="item item-truck">
 	          <video poster="" id="truck" autoplay controls muted loop height="100%">
