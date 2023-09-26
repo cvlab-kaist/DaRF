@@ -136,32 +136,28 @@
                 </div>
         </div>
 
-	<div class="hero-body" >
-	    <div class="container">
-	      <div id="results-carousel" class="carousel results-carousel">
-	        <div class="item item-museum">
-		  <!-- 
-	          <video poster="" id="museum" autoplay controls muted loop height="100%">
-	            <source src="./img/0710.mp4" type="video/mp4">
-	          </video>
-		  --> 
-	          <video class="video" id="Teaser"  width="50%"  loop playsinline autoPlay muted src="./img/0710.mp4" onplay="resizeAndPlay(this)"></video>
-	          <canvas width="150" height="150" class="videoMerge" id="TeaserMerge"></canvas>	
+	<div class="column">
+	    <div class="content">
+	        <div class="columns is-centered">
+	            <div class="column is-full-width">
+	                <div id="example1" class="bal-container-small">
+        	            <video class="video" id="Teaser"  width="50%"  loop playsinline autoPlay muted src="./img/0710.mp4" onplay="resizeAndPlay(this)"></video>
+			    <canvas width="150" height="150" class="videoMerge" id="TeaserMerge"></canvas>
+	                </div>
+			<div id="example2" class="bal-container-small">
+        	            <video class="video" id="Teaser"  width="50%"  loop playsinline autoPlay muted src="./img/0710.mp4" onplay="resizeAndPlay(this)"></video>
+			    <canvas width="150" height="150" class="videoMerge" id="TeaserMerge"></canvas>
+	                </div>
+			<div id="example3" class="bal-container-small">
+        	            <video class="video" id="Teaser"  width="50%"  loop playsinline autoPlay muted src="./img/0710.mp4" onplay="resizeAndPlay(this)"></video>
+			    <canvas width="150" height="150" class="videoMerge" id="TeaserMerge"></canvas>
+	                </div>
+	            </div>
 	        </div>
-	        <div class="item item-truck">
-	          <video poster="" id="truck" autoplay controls muted loop height="100%">
-	            <source src="./img/0710.mp4" type="video/mp4">
-	          </video>
-	        </div>
-	        <div class="item ponche">
-	          <video poster="" id="ponche" autoplay controls muted loop height="100%">
-	            <source src="./img/0710.mp4" type="video/mp4">
-	          </video>
-	        </div>
-	      </div>
 	    </div>
-	  </div>
-
+	</div>
+	    
+	<!--
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
 	    	<div>
@@ -172,7 +168,7 @@
                     Baseline is provided on the left and our reslut is provided on the right.
                 </div>
             </div>
-        </div>
+        </div> -->
 	    
         <div class="row">
             <div class="col-md-8 col-md-offset-2">           
@@ -187,7 +183,7 @@
                     Unlike existing work (SCADE [CVPR'23]) that distills depths by pretrained MDE to NeRF at seen view only, our DäRF fully exploits the ability of MDE by jointly optimizing NeRF and MDE at a specific scene, and distilling the monocular depth prior to NeRF at both seen and unseen views.
                 </div>
             </div>
-        </div>
+        </div> 
 
 
         <div class="row">
