@@ -318,13 +318,25 @@
                 <h3>
                     Video
                 </h3>
-                <center>
-                    <p>Coming Soon!</p>
-              <!--       <iframe width="560" height="315" src="https://www.youtube.com/embed/4R4Pi8qWXmo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe> -->
-                </center> 
             </div>
         </div>
+	
+	<section class="hero teaser">
+	  <div class="container is-max-desktop">
+	    <div>
+	          <video class="video" id="Teaser"  width="50%"  loop playsinline autoPlay muted src="./static/video_demos_compressed/teaser/0710.mp4" onplay="resizeAndPlay(this)"></video>
+	          <canvas width="150" height="150" class="videoMerge" id="TeaserMerge"></canvas>
+	    </div>
+	    <div class="hero-body">
+	      <h2 class="subtitle has-text-centered">
+	        <span class="dnerf">Consistent</span> <span class="dnerf">Video</span> <span class="dnerf">Translation</span> with the learned canonical image and deformation. 
+	        Slide for comparison. For all the demos, the inputs are provided on the left.
+	      </h2>
+	    </div>
+	  </div>
+	</section>
 
+	    
 
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
