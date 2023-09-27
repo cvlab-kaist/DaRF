@@ -1,4 +1,4 @@
-# DäRF: Boosting Radiance Fields from Sparse Inputs with Monocular Depth Adaptation
+# DäRF: Boosting Radiance Fields from Sparse Inputs with Monocular Depth Adaptation (NeurIPS 2023)
 <a href="https://arxiv.org/abs/2305.19201"><img src="https://img.shields.io/badge/arXiv-2305.19201-%23B31B1B"></a>
 <a href="https://ku-cvlab.github.io/DaRF/ "><img src="https://img.shields.io/badge/Project%20Page-online-brightgreen"></a>
 <br>
