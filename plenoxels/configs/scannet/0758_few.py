@@ -29,7 +29,7 @@ config = {
  'fake_img': '_novel_test',
  'stride': 3,
  'novel_patch_size': 128,
- 'dpt_weight_path': '/root/project/data/MIDAS/pretrained_model/',
+ 'dpt_weight_path': 'PRETRAINED_MiDaS_PATH',
 
  'novel_depth_loss': 0.01,
  'novel_depth_loss_function': 'scale_shift', 
