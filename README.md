@@ -83,8 +83,4 @@ If you use this software package, please cite our paper:
   journal={arXiv preprint arXiv:2305.19201},
   year={2023}
 }
-<<<<<<< HEAD
 ```
-=======
-```
->>>>>>> 29d2578a125ad947c0286abdaea2bd778316d86f
