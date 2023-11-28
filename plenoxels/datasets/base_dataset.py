@@ -154,7 +154,7 @@ class BaseDataset(Dataset, ABC):
 
     def __getitem__(self, index, return_idxs: bool = False):
         if self.split == 'train':
-            index = self.get_rand_ids(index)            
+            index = self.get_rand_ids(index)
 
         out = {}
 

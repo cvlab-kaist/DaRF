@@ -47,7 +47,7 @@ class ScannetDataset(BaseDataset):
             colmaps=None
             poses = torch.tensor(poses)
         else:
-            imgs, depths, poses, _raw_intrinsics, _all, scale, colmaps,filenames = load_scannet_images(datadir, split, fewshot)
+            imgs, depths, poses, _raw_intrinsics, _all, scale, colmaps = load_scannet_images(datadir, split, fewshot)
             height, width = imgs.shape[1:3]
 
             intrinsics = load_scannet_intrinsics(_raw_intrinsics, height, width, downsample)
@@ -80,7 +80,7 @@ class ScannetDataset(BaseDataset):
 
 
         if novel_depth_loss is not None:
-            _,_,poses_test,_,_, scale_center, _,_ = load_scannet_images(datadir,'test')
+            _,_,poses_test,_,_, scale_center, _ = load_scannet_images(datadir,'test')
             poses_test = torch.tensor(poses_test)
             
             noisy_poses_all = generate_noisy_pose(poses,convention=convention, scale_center=scale_center)
@@ -276,7 +276,7 @@ def load_scannet_images(subject_dir, split, fewshot=None, load_depth = 1):
 
 
 
-    if (fewshot is not None) and split=='train':
+    if (fewshot) and split=='train':
         if '0710' in subject_dir:
             few_gen = np.array([1,2,4,5,6,10,11,12,13])
             print('fewshot : ', few_gen)
@@ -295,7 +295,7 @@ def load_scannet_images(subject_dir, split, fewshot=None, load_depth = 1):
         return images, depths, camtoworlds, intrinsics, [images_all, depths_all, poses_all], [scale, center], torch.tensor(colmaps_all)
 
     else:
-        return images_all, depths_all, poses_all, intrinsics, None, [scale, center], torch.tensor(colmaps_all),filenames
+        return images_all, depths_all, poses_all, intrinsics, None, [scale, center], torch.tensor(colmaps_all)
 
 
 def load_scannet_intrinsics(raw_intrinsic, img_h, img_w, downsample) -> Intrinsics:
