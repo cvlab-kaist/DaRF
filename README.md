@@ -35,7 +35,7 @@ Also, you need to download pretrained MiDaS 3.0 weights(dpt_hybrid_384) on [here
 And you should replace the 'dpt_pretrained_weight' part of the config file with the MiDaS pretrained weights path.
 
 ## Dataset Download
-You can download Scannet Dataset on [here](https://koreaoffice-my.sharepoint.com/:f:/g/personal/seong0905_korea_ac_kr/EvJ6ob2gemdAtbUptJSzA2gBNfbgCeW2opH6DNGaLe3Odg?e=ew0TwH).
+You can download Scannet Dataset on [here](https://koreaoffice-my.sharepoint.com/:u:/g/personal/seong0905_korea_ac_kr/EQ4QA4rpC5hMib8XVs30pJMBTT7oQXBFkY5lrXjpH3YH3g?e=g49eBd).
 
 If you want to download data on a different path, you should replace the 'data_dirs' part of the config file with the donloaded dataset path.
 
